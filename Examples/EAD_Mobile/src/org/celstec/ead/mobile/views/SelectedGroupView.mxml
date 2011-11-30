@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:navigationContent>
+		<s:Button label="Back" id="backButton" />
+	</s:navigationContent>
+	
+	<s:Scroller width="100%" height="100%">
+		<s:Group width="100%" height="100%">
+			<s:layout>
+				<s:VerticalLayout horizontalAlign="center" paddingLeft="25" paddingRight="25" paddingTop="25"/>
+			</s:layout>
+			
+			<s:TileGroup width="100%" columnWidth="125" horizontalAlign="left" horizontalGap="10" requestedColumnCount="2" 
+						 requestedRowCount="2" verticalAlign="middle" verticalGap="10">
+				<s:Label fontWeight="bold" text="Current Usage"/>
+				<s:TextArea id="groupPowerusage" height="32" editable="false" fontWeight="bold" textAlign="right"/>
+				<s:Label fontWeight="bold" text="Usage Today"/>
+				<s:TextArea id="groupTotalusagetoday" height="32" editable="false" fontWeight="bold" textAlign="right"/>
+			</s:TileGroup>
+			
+			<s:Spacer height="10"/>
+			
+			<s:Label fontStyle="italic" text="Appliance(s)"/>
+
+			<s:Group width="100%" height="100%">
+				<s:Rect width="100%" height="100%">
+					<s:fill><s:SolidColor color="0xEEEEEE" /></s:fill>
+				</s:Rect>
+				<s:Group width="100%" height="100%" id="applianceGroup">
+					<s:layout>
+						<s:VerticalLayout horizontalAlign="center" paddingTop="10"/>
+					</s:layout>
+				</s:Group>
+			</s:Group>
+		</s:Group>
+	</s:Scroller>
+	
+</s:View>

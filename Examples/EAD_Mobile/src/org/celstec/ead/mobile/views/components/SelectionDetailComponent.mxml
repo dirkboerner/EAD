@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" paddingBottom="25"/>
+	</s:layout>
+	
+	<s:Label fontStyle="italic" id="applianceName"/>
+	<s:Spacer height="10"/>
+	<s:TileGroup width="100%" columnWidth="125" horizontalAlign="left" horizontalGap="10" 
+				 requestedColumnCount="2" requestedRowCount="2" verticalAlign="middle" verticalGap="10">
+		<s:Label fontWeight="bold" text="Current Usage"/>
+		<s:TextArea id="appliancePowerusage" height="32" editable="false" fontWeight="bold" 
+					textAlign="right"/>
+		<s:Label fontWeight="bold" text="Usage Today"/>
+		<s:TextArea id="applianceTotalusagetoday" height="32" editable="false" fontWeight="bold" 
+					textAlign="right"/>
+	</s:TileGroup>
+	
+</s:Group>
