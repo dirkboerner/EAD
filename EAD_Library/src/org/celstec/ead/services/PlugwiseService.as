@@ -21,7 +21,14 @@ package org.celstec.ead.services
 		}
 		
 		//Insert URL to the Plugwise Data API
-		private const PLUGWISE_BASE_URL:String = "";
+		private const PLUGWISE_BASE_URL:String = "http://145.20.132.24:8080/api/data2.xml";
+		/*
+		type = rooms||groups||appliances		>>> Shows Room,Group,Appliances
+		roomid = ##			>>> Can only be used in combination with type appliances. Shows all appliances in room with id ##
+		groupid = ##		>>>	Can only be used in combination with type appliances. Shows all Appliances in group with id ##
+		
+		Example: data2.xml?type=appliances&roomid=2 (will show all aplliances in room 2)
+		*/
 
 		public function PlugwiseService()
 		{
