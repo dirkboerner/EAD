@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import org.celstec.ead.models.vo.Appliance;
+			
+			[Embed(source='assets/green.png')]
+			private const GREEN:Class;
+			
+			[Embed(source='assets/yellow.png')]
+			private const YELLOW:Class;
+			
+			[Embed(source='assets/red.png')]
+			private const RED:Class;
+			
+			public function myIconFunction(data:Object):Object
+			{
+				var source:Object = new Object();
+				
+				if(data is Appliance)
+				{
+					if(data.powerUsage <= 0){
+						source = GREEN;
+					}
+					else if(data.powerUsage <= 10){
+						source = YELLOW;
+					}
+					else if(data.powerUsage > 10){
+						source = RED;
+					}
+				}
+				return source;
+			}
+			
+		]]>
+	</fx:Script>
+
+	<!--<s:states> 
+		<s:State name="normal"/> 
+		<s:State name="hovered"/> 
+	</s:states>-->
+	
+	<s:HGroup gap="5" verticalAlign="middle">
+		<s:BitmapImage source="{myIconFunction(data)}" width="25" height="25" />
+		<s:VGroup gap="2">
+			<s:Label id="labelDisplay" fontSize="16"/>
+		</s:VGroup>
+	</s:HGroup>
+
+</s:ItemRenderer>

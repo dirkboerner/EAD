@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" paddingBottom="10"/>
+	</s:layout>
+	
+	
+	<s:HGroup height="100%" width="100%" verticalAlign="middle">
+		<s:VGroup horizontalAlign="center" verticalAlign="middle" height="100%" width="35%">
+			<s:Label id="powerUsageLabel" text="Current Usage" visible="false"/>
+			<s:Label id="powerUsage" fontSize="35" fontWeight="bold"/>
+		</s:VGroup>
+		<s:Label id="title" width="30%" fontWeight="bold" fontSize="20" textAlign="center" verticalAlign="middle"/>
+		<s:VGroup horizontalAlign="center" verticalAlign="middle" height="100%" width="35%">
+			<s:Label id="totalUsageTodayLabel" text="Total Usage Today" visible="false"/>
+			<s:Label id="totalUsageToday" fontSize="25" fontWeight="bold"/>
+		</s:VGroup>
+	</s:HGroup>
+	
+</s:Group>

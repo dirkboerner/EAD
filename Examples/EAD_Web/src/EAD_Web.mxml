@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   xmlns:web="org.celstec.ead.web.*"
+			   xmlns:components="org.celstec.ead.web.views.components.*">
+
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<web:EAD_WebContext contextView="{this}" />
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:layout>
+	
+		<s:Panel id="panel" width="800" height="600" title="Energy Awareness" fontSize="16">
+			<s:HGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle" 
+					  paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10">
+				<s:VGroup width="225" height="100%" gap="0">
+					
+					<s:TabBar id="myTabBar" dataProvider="{myViewStack}" width="100%" fontSize="16"/>
+					<mx:ViewStack id="myViewStack" width="100%" height="100%">
+						
+						<s:NavigatorContent id="rooms" label="Rooms">
+							<components:SelectionListComponent id="roomsSelectionList" 
+															   width="100%" height="100%" />
+						</s:NavigatorContent>
+						
+						<s:NavigatorContent id="groups" label="Groups">
+							<components:SelectionListComponent id="groupsSelectionList" 
+															   width="100%" height="100%" />
+						</s:NavigatorContent>
+						
+					</mx:ViewStack>
+				</s:VGroup>
+				<s:VGroup width="85%" height="100%" gap="0">
+					<components:SelectionDetailComponent width="100%" height="5%" />
+					<components:OverViewComponent width="100%" height="95%"/>
+				</s:VGroup>
+			</s:HGroup>
+		</s:Panel>
+</s:Application>

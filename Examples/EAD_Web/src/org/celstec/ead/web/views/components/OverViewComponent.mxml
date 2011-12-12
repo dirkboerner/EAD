@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:treemap="fr.kapit.components.treemap.*" xmlns:pictogram="fr.kapit.pictogram.*">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:RadioButtonGroup id="selectionGroup" />
+		<s:RadioButtonGroup id="selectionGroup2" />
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import org.celstec.ead.models.vo.*;
+			
+			public var logDayAC:ArrayCollection = new ArrayCollection();
+			public var logWeekAC:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			public var myAreaChartDataProvider:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			public var myAreaChartCategoryField:String = new String("time");
+			
+			
+			[Bindable]
+			public var myTreeMapDataProvider:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			public var myTreeMapLabelField:String = new String("title");
+			[Bindable]
+			public var myTreeMapAreaField:String = new String("powerUsage");
+			
+			[Bindable]
+			public var myPictogramChartDataProvider:ArrayCollection = new ArrayCollection();
+			
+			private function myTooltipFunction(item:Object, info:Object):String   
+			{   
+				var tooltip:String = new String();
+				if(item is Appliance)
+				{
+					tooltip = item["name"]+"\nCurrent Usage : "+item["powerUsage"]+" W\nTotal Usage Today : "+item["totalUsageToday"]+" kWh";
+				}
+				else
+					tooltip = item["title"]+"\nCurrent Usage : "+item["powerUsage"]+" W\nTotal Usage Today : "+item["totalUsageToday"]+" kWh";
+								    
+				return tooltip;   
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Style>
+		.myAxisStyle {
+			minorTickPlacement:none;
+		}
+	</fx:Style>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="left"/>
+	</s:layout>
+	
+	<s:VGroup width="100%" height="100%" gap="0">
+		<s:TabBar selectedIndex="0" dataProvider="{myViewStack}" />
+		
+		<mx:ViewStack id="myViewStack" selectedIndex="0" borderStyle="solid" width="100%" height="100%">
+			
+			<s:NavigatorContent id="exploreConsumption" label="Explore">
+				<s:VGroup width="100%" height="100%" paddingLeft="10" paddingTop="10" paddingRight="10" paddingBottom="10" horizontalAlign="center" verticalAlign="middle">
+					<s:Label width="100%" height="5%" fontSize="12"
+							 text="Select an appliance to explore it's consumption." textAlign="center" verticalAlign="middle"/>
+					
+					<mx:AreaChart id="myAreaChart" dataProvider="{myAreaChartDataProvider}" width="100%" height="100%">	
+						<mx:horizontalAxisRenderers>
+							<mx:AxisRenderer axis="{timeAxis}" styleName="myAxisStyle" />
+						</mx:horizontalAxisRenderers>
+						<mx:horizontalAxis>
+							<mx:CategoryAxis id="timeAxis" categoryField="{myAreaChartCategoryField}"/>
+						</mx:horizontalAxis>
+						<mx:series>
+							<mx:AreaSeries displayName="" yField="data" form="horizontal" />
+						</mx:series>
+					</mx:AreaChart>
+
+					<s:HGroup horizontalAlign="center" verticalAlign="middle" width="100%" height="5%">
+						<s:RadioButton group="{selectionGroup2}" label="Today" value="today" selected="true" />
+						<s:RadioButton group="{selectionGroup2}" label="Last Week" value="week"/>
+					</s:HGroup>
+				</s:VGroup>
+			</s:NavigatorContent>
+			
+			<s:NavigatorContent id="relateConsumption" label="Relate">
+				<s:VGroup width="100%" height="100%" paddingLeft="10" paddingTop="10" paddingRight="10" paddingBottom="10" horizontalAlign="center" verticalAlign="middle">
+					<s:Label width="100%" height="7%" fontSize="12"
+							 text="Select a room/group or appliance to relate it's consumption." textAlign="center" verticalAlign="middle"/>
+					
+					<pictogram:PictogramChart id="myPictogramChart" dataProvider="{myPictogramChartDataProvider}"
+												   valueField="totalUsageToday"
+												   columnCount="2" rowCount="2"
+												   cellGridPercentHeight="50"
+												   cellGridPercentWidth="50"
+												   unitColumnCount="4"
+												   unitRowCount="5"
+												   metaDataField="name"
+												   width="100%" height="100%"/>
+					
+					<s:Label width="100%" height="3%" color="#999999" fontSize="12"
+							 text="¹ Total usage today in kWh." textAlign="center" verticalAlign="middle"/>
+					<s:Label width="100%" height="7%" color="#999999" fontSize="12"
+							 text="² Total usage in kWh/day, based on the estimated total energy consumption February 2009 - February 2010, assuming 250 working days."
+							 textAlign="center" verticalAlign="middle"/>
+				</s:VGroup>
+			</s:NavigatorContent>
+			
+			<s:NavigatorContent id="compareConsumption" label="Compare">
+				<s:VGroup width="100%" height="100%" paddingLeft="10" paddingTop="10" paddingRight="10" paddingBottom="10" horizontalAlign="center" verticalAlign="middle">
+					<s:Label width="100%" height="5%" fontSize="12"
+							 text="Select a room/group to compare the appliances' consumption." textAlign="center" verticalAlign="middle"/>
+					
+					<treemap:TreeMap id="myTreeMap" dataProvider="{myTreeMapDataProvider}"
+									 labelField="{myTreeMapLabelField}"
+									 areaField="{myTreeMapAreaField}"
+									 toolTipFunction="{myTooltipFunction}"
+									 colorField="{myTreeMapAreaField}"
+									 colorPolicy="bichromatic" firstColor="0xFF0000" secondColor="0x000000"
+									 width="100%" height="100%"/>
+					
+					<s:HGroup horizontalAlign="center" verticalAlign="middle" width="100%" height="5%">
+						<s:RadioButton group="{selectionGroup}" label="Current Usage" value="powerUsage" selected="true" />
+						<s:RadioButton group="{selectionGroup}" label="Total Usage Today" value="totalUsageToday"/>
+					</s:HGroup>
+				</s:VGroup>	
+			</s:NavigatorContent>
+		</mx:ViewStack>
+	</s:VGroup>
+</s:Group>
