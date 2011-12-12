@@ -1,5 +1,7 @@
 package org.celstec.ead.models.vo
 {
+	import mx.collections.ArrayCollection;
+
 	public class Appliance
 	{
 		private var _id:String;
@@ -7,6 +9,8 @@ package org.celstec.ead.models.vo
 		private var _powerUsage:Number;
 		private var _totalUsage:Number;
 		private var _totalUsageToday:Number;
+		private var _logweek:ArrayCollection;
+		private var _logday:ArrayCollection;
 		
 		public function Appliance()
 		{
@@ -15,8 +19,30 @@ package org.celstec.ead.models.vo
 			this._powerUsage = new Number();
 			this._totalUsage = new Number();
 			this._totalUsageToday = new Number();
+			this._logweek = new ArrayCollection();
+			this._logday = new ArrayCollection();
 		}
 		
+		public function get logday():ArrayCollection
+		{
+			return _logday;
+		}
+
+		public function set logday(value:ArrayCollection):void
+		{
+			_logday = value;
+		}
+
+		public function get logweek():ArrayCollection
+		{
+			return _logweek;
+		}
+
+		public function set logweek(value:ArrayCollection):void
+		{
+			_logweek = value;
+		}
+
 		public function get totalUsageToday():Number
 		{
 			return _totalUsageToday;
